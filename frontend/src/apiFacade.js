@@ -1,4 +1,4 @@
-const URL = "http://localhost:8080/jwtbackend";
+const URL = "https://www.cph-nr80.dk/CA3BackEnd/";
 
 async function handleHttpErrors(res) {
  if (!res.ok) {
