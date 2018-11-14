@@ -1,6 +1,7 @@
 import React, {component} from 'react';
 import {BrowserRouter as Router, Route, NavLink} from "react-router-dom";
 import './App.css';
+import InfoStar from './info';
 
 function Nav(){
   return (
@@ -21,7 +22,7 @@ function Nav(){
           </li>
         </ul>
 
-        <Route exact path="/" component={Home} />
+        <Route path="/" component={Home} />
         <Route path="/user" component={User} />
         <Route path="/admin" component={Admin} />
         <Route path="/info" component={Info} />
@@ -46,13 +47,14 @@ function User(){
 function Admin(){
   return(
     <div>
-      dfdf
+      
     </div>
   );
 }
 function Info(){
   return(
     <div>
+    <InfoStar />
     </div>
   );
 }

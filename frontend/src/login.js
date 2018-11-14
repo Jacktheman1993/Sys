@@ -39,7 +39,6 @@ class LoggedIn extends Component {
    return (
      <div>
     <Nav />
-       <h2>Data Received from server</h2>
        <h3>{this.state.dataFromServer}</h3>
      </div>
    )
