@@ -1,4 +1,5 @@
-const URL = "https://www.cph-nr80.dk/CA3BackEnd/";
+import UrlLink from './settings';
+const URL = UrlLink;
 
 async function handleHttpErrors(res) {
  if (!res.ok) {
