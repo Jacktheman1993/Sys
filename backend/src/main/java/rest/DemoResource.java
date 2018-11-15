@@ -1,7 +1,10 @@
 package rest;
 
+import com.google.gson.Gson;
 import facade.SwapiFacade;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
@@ -14,6 +17,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import net.minidev.json.JSONArray;
 
 /**
  * REST Web Service
@@ -25,6 +29,8 @@ public class DemoResource {
 
     @Context
     private UriInfo context;
+    private Gson gson;
+   
     
     @Context
     SecurityContext securityContext;
@@ -53,9 +59,9 @@ public class DemoResource {
     @Path("swapi")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getFromSwapi() throws IOException{
-        System.out.println("før swapi");
-        String swapiback = fac.getSwappiData(1);
-        System.out.println("efter swapi");
+         String swapiback = fac.getSwappiData();
+       
+    
         
         return Response.ok(swapiback).build();
     }

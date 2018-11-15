@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import javax.persistence.EntityManagerFactory;
 
@@ -24,7 +26,23 @@ EntityManagerFactory emf;
         this.emf = emf;
     }
 
-public String getSwappiData(int id) throws MalformedURLException, IOException{
+ 
+    public String getSwappiData() throws IOException{
+        
+        List<String> list = new ArrayList<>();
+        for (int i = 1; i <= 3; i++) {
+            list.add(getSwappiData2(i));
+            
+        }
+       
+
+        
+        return  "{\"results\": [ "+String.join(",", list)+"]}";
+    }
+    
+    
+    
+public String getSwappiData2(int id) throws MalformedURLException, IOException{
     URL url = new URL("https://swapi.co/api/people/"+id);
     HttpURLConnection con = (HttpURLConnection) url.openConnection();
     con.setRequestMethod("GET");
