@@ -30,7 +30,7 @@ EntityManagerFactory emf;
     public String getSwappiData() throws IOException{
         
         List<String> list = new ArrayList<>();
-        for (int i = 1; i <= 3; i++) {
+        for (int i = 1; i <= 5; i++) {
             list.add(getSwappiData2(i));
             
         }

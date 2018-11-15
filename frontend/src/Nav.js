@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import './App.css';
-import InfoStar from './info';
 import facade from './apiFacade';
 
 class Nav extends Component {
@@ -13,7 +12,7 @@ class Nav extends Component {
   async componentDidMount() {
     try {
       const info = await facade.getInfo();
-      this.setState({ info:info });
+      this.setState({ info:info.results });
     } catch (err) {
       console.log("STATE :" + err)
     }
@@ -43,7 +42,7 @@ class Nav extends Component {
           <Route path="/" component={Home} />
           <Route path="/user" component={User} />
           <Route path="/admin" component={Admin} />
-          <Route path="/info" component={Infos} />
+          <Route path="/info" render={ () => <InfoStar info={this.state.info}/>} />
         </div>
       </Router>
     )
@@ -70,13 +69,23 @@ function Admin() {
     </div>
   );
 }
-function Infos(props) {
-  const info = props;
-  console.log(info);
-  return (
-    <div>
-      <InfoStar />
-    </div>
-  );
+function InfoStar(props) {
+  const { info } = props;
+console.log("hej" , info)
+const rows = info.map(function(data){return <tr key = {data.url}><td>{data.name}</td><td>{data.height}</td><td>{data.gender}</td><td>{data.birth_year}</td></tr>})
+  
+return (
+      <div>
+        <h3>Info om Star Wars Personer</h3>
+        <table className="table">
+        <thead>
+          <tr><th>Name</th><th>Height</th><th>Gender</th><th>Birth-Year</th></tr>
+        </thead>
+        <tbody>
+        {rows}
+        </tbody>
+      </table>
+      </div>
+    )
 }
 export default Nav;

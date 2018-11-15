@@ -52,7 +52,7 @@ class ApiFacade {
     return fetch(URL + "/api/info/user", options).then(handleHttpErrors);
   }
    getInfo = () => {
-     const options = this.makeOptions("GET", true);
+     const options = this.makeOptions("GET");
     return fetch(URL + "/api/info/swapi", options).then(handleHttpErrors);
   }
 }
