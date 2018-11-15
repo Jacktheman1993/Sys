@@ -51,6 +51,10 @@ class ApiFacade {
     const options = this.makeOptions("GET",true); //True add's the token
     return fetch(URL + "/api/info/user", options).then(handleHttpErrors);
   }
+   getInfo = () => {
+     const options = this.makeOptions("GET", true);
+    return fetch(URL + "/api/info/swapi", options).then(handleHttpErrors);
+  }
 }
 
 const facade = new ApiFacade();

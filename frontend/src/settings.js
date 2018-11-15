@@ -1,1 +1,1 @@
-export default URL = "https://www.cph-nr80.dk/CA3BackEnd/";
+export default URL = "http://localhost:8080/jwtbackend";

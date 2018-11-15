@@ -1,60 +1,81 @@
-import React, {component} from 'react';
-import {BrowserRouter as Router, Route, NavLink} from "react-router-dom";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import './App.css';
 import InfoStar from './info';
+import facade from './apiFacade';
 
-function Nav(){
+class Nav extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {info: [] }
+    
+  }
+  async componentDidMount() {
+    try {
+      const info = await facade.getInfo();
+      this.setState({ info:info });
+    } catch (err) {
+      console.log("STATE :" + err)
+    }
+    
+  }
+  render() {
+    return (
+      
+      <Router>
+        <div>
+          
+          <ul className="header">
+            <li>
+              <NavLink exact to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/user">User</NavLink>
+            </li>
+            <li>
+              <NavLink to="/admin">Admin</NavLink>
+            </li>
+            <li>
+              <NavLink to="/info">Info</NavLink>
+            </li>
+          </ul>
+
+          <Route path="/" component={Home} />
+          <Route path="/user" component={User} />
+          <Route path="/admin" component={Admin} />
+          <Route path="/info" component={Infos} />
+        </div>
+      </Router>
+    )
+  }
+}
+function Home() {
   return (
-    <Router>
-      <div>
-        <ul className="header">
-          <li>
-            <NavLink exact to ="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to ="/user">User</NavLink>
-          </li>
-          <li>
-            <NavLink to ="/admin">Admin</NavLink>
-          </li>
-          <li>
-            <NavLink to ="/info">Info</NavLink>
-          </li>
-        </ul>
+    <div>
+    
+    </div>
+  );
+}
+function User() {
+  return (
+    <div>
 
-        <Route path="/" component={Home} />
-        <Route path="/user" component={User} />
-        <Route path="/admin" component={Admin} />
-        <Route path="/info" component={Info} />
-      </div>
-    </Router>
-  )
-}
-function Home(){
-  return(
-    <div>
-        
     </div>
   );
 }
-function User(){
-  return(
+function Admin() {
+  return (
     <div>
-      
+
     </div>
   );
 }
-function Admin(){
-  return(
+function Infos(props) {
+  const info = props;
+  console.log(info);
+  return (
     <div>
-      
-    </div>
-  );
-}
-function Info(){
-  return(
-    <div>
-    <InfoStar />
+      <InfoStar />
     </div>
   );
 }

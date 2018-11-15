@@ -1,19 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
-import '../node_modules/bootstrap/dist/css/bootstrap.min,css';
-import BootstrapTable from 'react-bootstrap-table-next';
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
-const columns = [{
-    
-}]
-export default class InfoStar extends Component {
-  render(){
-    return (
+export default function InfoStar(props) {
+const { info } = props;
+console.log(props)
+//const rows = info.map(function(data){return <h2>{data.gender}</h2>})
+  
+return (
       <div>
         <h3>Info om Star Wars Personer</h3>
-        <BootstrapTable />
+        <table className="table">
+        <thead>
+          <tr><th>Age</th><th>Name</th><th>Gender</th><th>Email</th></tr>
+        </thead>
+        <tbody>
+        
+        </tbody>
+      </table>
       </div>
     )
-  }
 }
 
