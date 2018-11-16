@@ -4,6 +4,7 @@ import './App.css';
 import facade from './apiFacade';
 import Error from './ERROR';
 import jwtDecode from '../node_modules/jwt-decode';
+import Dec from './dec';
 
 class Nav extends Component {
   constructor(props) {
@@ -58,14 +59,14 @@ class Nav extends Component {
 function Home() {
   return (
     <div>
-
+    <Dec />
     </div>
   );
 }
 function User(props) {
   const roleToken = props;
   console.log("ROLE ", roleToken);
-  if ("user" === roleToken) {
+  if (roleToken.roleToken.includes("user")) {
     return (
       <div>
         <h2>User</h2>
@@ -82,7 +83,7 @@ function User(props) {
 }
 function Admin(props) {
   const roleToken = props;
-  if ("admin" === roleToken) {
+  if (roleToken.roleToken.includes("admin")) {
     return (
       <div>
         <h2>Admin</h2>
