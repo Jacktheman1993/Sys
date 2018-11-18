@@ -19,7 +19,7 @@ class Nav extends Component {
       const tokenDE = jwtDecode(facade.getToken());
       const roleToken = tokenDE.roles;
       this.setState({ roleToken: roleToken })
-      console.log(roleToken);
+      
 
     } catch (err) {
       console.log("STATE :" + err)
@@ -65,7 +65,7 @@ function Home() {
 }
 function User(props) {
   const roleToken = props;
-  console.log("ROLE ", roleToken);
+  
   if (roleToken.roleToken.includes("user")) {
     return (
       <div>
@@ -100,7 +100,7 @@ function Admin(props) {
 }
 function Info(props) {
   const { info } = props;
-  console.log("hej", info)
+  
   const rows = info.map(function (data) { return <tr key={data.url}><td>{data.name}</td><td>{data.height}</td><td>{data.gender}</td><td>{data.birth_year}</td></tr> })
 
   return (
