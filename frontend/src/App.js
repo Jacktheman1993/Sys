@@ -4,7 +4,7 @@ import Nav from './Nav';
 class LogIn extends Component {
  constructor(props) {
    super(props);
-   this.state = { username: "user", password: "test" }
+   this.state = { username: "", password: "" }
  }
  login = (evt) => {
    evt.preventDefault();
@@ -21,7 +21,6 @@ class LogIn extends Component {
          <input placeholder="User Name" id="username"/>
          <input placeholder="Password" id="password" />
          <button>Login</button>
-         <h2>Bare tryk på Login</h2>
        </form>
      </div>
    )
@@ -30,16 +29,14 @@ class LogIn extends Component {
 class LoggedIn extends Component {
  constructor(props) {
    super(props);
-   this.state= {dataFromServer: "Fetching!!"};
+
  }
- componentDidMount(){
-  facade.fetchData().then(res=> this.setState({dataFromServer: res}));
- }
+
  render() {
    return (
      <div>
     <Nav />
-       <h3>{this.state.dataFromServer}</h3>
+  
      </div>
    )
  }

@@ -4,6 +4,7 @@ import './App.css';
 import facade from './apiFacade';
 import Error from './ERROR';
 import jwtDecode from '../node_modules/jwt-decode';
+import Dec from './dec';
 
 class Nav extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Nav extends Component {
       const tokenDE = jwtDecode(facade.getToken());
       const roleToken = tokenDE.roles;
       this.setState({ roleToken: roleToken })
-      console.log(roleToken);
+      
 
     } catch (err) {
       console.log("STATE :" + err)
@@ -58,14 +59,14 @@ class Nav extends Component {
 function Home() {
   return (
     <div>
-
+    <Dec />
     </div>
   );
 }
 function User(props) {
   const roleToken = props;
-  console.log("ROLE ", roleToken);
-  if ("user" === roleToken) {
+  
+  if (roleToken.roleToken.includes("user")) {
     return (
       <div>
         <h2>User</h2>
@@ -82,7 +83,7 @@ function User(props) {
 }
 function Admin(props) {
   const roleToken = props;
-  if ("admin" === roleToken) {
+  if (roleToken.roleToken.includes("admin")) {
     return (
       <div>
         <h2>Admin</h2>
@@ -99,16 +100,18 @@ function Admin(props) {
 }
 function Info(props) {
   const { info } = props;
-  console.log("hej", info)
+  
+  const rows = info.map(function (data) { return <tr key={data.url}><td>{data.name}</td><td>{data.height}</td><td>{data.gender}</td><td>{data.birth_year}</td></tr> })
 
   return (
     <div>
       <h3>Info om Star Wars Personer</h3>
       <table className="table">
         <thead>
+          <tr><th>Name</th><th>Height</th><th>Gender</th><th>Birth-Year</th></tr>
         </thead>
         <tbody>
-          {info}
+          {rows}
         </tbody>
       </table>
     </div>
