@@ -20,10 +20,12 @@ import javax.persistence.EntityManagerFactory;
  */
 public class SwapiFacade {
 
-EntityManagerFactory emf;    
+// EntityManagerFactory emf;    
 
-    public SwapiFacade(EntityManagerFactory emf) {
-        this.emf = emf;
+    
+    // dont need a EntityManagerFactory emf parameter
+    public SwapiFacade() {
+    //    this.emf = emf;
     }
 
  
