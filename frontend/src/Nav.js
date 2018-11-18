@@ -100,17 +100,15 @@ function Admin(props) {
 function Info(props) {
   const { info } = props;
   console.log("hej", info)
-  const rows = info.map(function (data) { return <tr key={data.url}><td>{data.name}</td><td>{data.height}</td><td>{data.gender}</td><td>{data.birth_year}</td></tr> })
 
   return (
     <div>
       <h3>Info om Star Wars Personer</h3>
       <table className="table">
         <thead>
-          <tr><th>Name</th><th>Height</th><th>Gender</th><th>Birth-Year</th></tr>
         </thead>
         <tbody>
-          {rows}
+          {info}
         </tbody>
       </table>
     </div>
