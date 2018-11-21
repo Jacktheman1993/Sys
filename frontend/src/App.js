@@ -1,69 +1,47 @@
-import React, { Component } from "react"
-import facade from "./apiFacade";
-import Nav from './Nav';
-class LogIn extends Component {
- constructor(props) {
-   super(props);
-   this.state = { username: "", password: "" }
- }
- login = (evt) => {
-   evt.preventDefault();
-   this.props.login(this.state.username, this.state.password);
- }
- onChange = (evt) => {
-   this.setState({[evt.target.id]: evt.target.value})
- }
- render() {
-   return (
-     <div>
-       <h2>Login</h2>
-       <form onSubmit={this.login} onChange={this.onChange} >
-         <input placeholder="User Name" id="username"/>
-         <input placeholder="Password" id="password" />
-         <button>Login</button>
-       </form>
-     </div>
-   )
- }
-}
-class LoggedIn extends Component {
- constructor(props) {
-   super(props);
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import './App.css';
+import Søger from './søg';
 
- }
+class Nav extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { info: [], roleToken: [] }
+  }
+  render() {
+    return (
 
- render() {
-   return (
-     <div>
-    <Nav />
-  
-     </div>
-   )
- }
+      <Router>
+        <div>
+
+          <ul className="header">
+            <li>
+              <NavLink exact to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/søg">Søg</NavLink>
+            </li>
+          </ul>
+
+          <Route path="/" component={Home} />
+          <Route path="/søg" component={Søg} />
+        </div>
+      </Router>
+    )
+  }
 }
-class App extends Component {
- constructor(props) {
-   super(props);
-   this.state = { loggedIn: false }
- }
- logout = () => {
-  facade.logout();
-  this.setState({ loggedIn: false });
- }
- login = (user, pass) => {
-  facade.login(user,pass)
-  .then(res =>this.setState({ loggedIn: true }));
- }
- render() {
-   return (
-     <div>
-       {!this.state.loggedIn ? (<LogIn login={this.login} />) :
-         ( <div>
-             <LoggedIn/>
-             <button onClick={this.logout}>Logout</button>
-           </div>)}
-     </div>
-   )
- }
+function Home() {
+  return (
+    <div>
+      <h1>Home</h1>
+    </div>
+  );
 }
-export default App;
+function Søg() {
+  return (
+    <div>
+    <Søger />
+    </div>
+  );
+}
+export default Nav;
