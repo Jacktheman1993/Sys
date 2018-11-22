@@ -2,7 +2,6 @@ package rest;
 
 
 //import facade.SwapiFacade;
-import facade.SwapiFacade;
 import java.io.IOException;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.core.Context;
@@ -32,7 +31,7 @@ public class DemoResource {
     SecurityContext securityContext;
   // removed becuase dont need for this project
   //  SwapiFacade fac = new SwapiFacade(Persistence.createEntityManagerFactory("pu"));
-    SwapiFacade fac = new SwapiFacade();
+
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -52,16 +51,8 @@ public class DemoResource {
         return "\"Hello from ADMIN"+ user+"\"";
     }
     
-    @GET
-    @Path("swapi")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getFromSwapi() throws IOException{
-        String swapiback = fac.getSwappiData();
-        
-       
-    
-        
-        return Response.ok(swapiback).build();
-    }
+
     
 }
+
+
