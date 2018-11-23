@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import './App.css';
-import Søger from './søg';
+import Search from './search';
 
 class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = { info: [], roleToken: [] }
   }
+
+  error = (errMessage) => {
+    this.setState({err: errMessage})
+  }
   render() {
     return (
-
       <Router>
         <div>
 
@@ -18,29 +21,26 @@ class Nav extends Component {
             <li>
               <NavLink exact to="/">Home</NavLink>
             </li>
-            <li>
-              <NavLink to="/søg">Søg</NavLink>
-            </li>
+            
           </ul>
-
-          <Route path="/" component={Home} />
-          <Route path="/søg" component={Søg} />
+.
+          <Route exact path="/" render={(props) => <Search  error={this.error} {...props}/>} />
+          <Route path ="/results" component={Results}/>
         </div>
       </Router>
     )
   }
 }
-function Home() {
+
+function Results(props) {
+  const results = props.location.state.results;
+  const { country, city } = props.location.state.results;
+  console.log("country", country)
+  console.log("city", city)
+  console.log("results", props.location.state.results)
   return (
     <div>
-      <h1>Home</h1>
-    </div>
-  );
-}
-function Søg() {
-  return (
-    <div>
-    <Søger />
+      <h1>hej bagge</h1>
     </div>
   );
 }
