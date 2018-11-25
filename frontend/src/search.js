@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import { Redirect } from "react-router";
+//import { Redirect } from "react-router";
 export default class Search extends Component {
     constructor(props) {
       super(props);
-      this.state = { newsearch: {country:"",city:"", datoF: "", datoT: ""}, results: [] }
+      this.state = { newSearch: {country:"",city:"", datoF: "", datoT: ""}, results: [] }
     }
     search = (evt) =>{
         evt.preventDefault();
@@ -47,9 +47,9 @@ export default class Search extends Component {
                 <h2>City</h2>
                 <input  placeholder="City" id="city" name="city" value={this.state.newSearch.city}  onChange={this.inputVal}/>
                 <h2>Dato From</h2>
-                <input type="date" placeholder="Dato To" id="datoF" name="datoF" value={this.state.newSearch.datoF} onChange={this.inputVal} />
+                <input type="date" placeholder="Dato To" id="datoT" name="datoT" value={this.state.newSearch.datoT} onChange={this.inputVal} />
                 <h2>Dato To</h2>
-                <input type="date" placeholder="Dato From" id="datoT" name="datoT" value={this.state.newSearch.datoT} onChange={this.inputVal} />
+                <input type="date" placeholder="Dato From" id="datoF" name="datoF" value={this.state.newSearch.datoF} onChange={this.inputVal} />
                 
                 <button>Søg</button>
             </form>

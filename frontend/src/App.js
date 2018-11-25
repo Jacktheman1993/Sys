@@ -34,13 +34,13 @@ class Nav extends Component {
 
 function Results(props) {
   const results = props.location.state.results;
-  const { country, city } = props.location.state.results;
+  const { country, city, datoF, datoT } = props.location.state.results;
   console.log("country", country)
   console.log("city", city)
   console.log("results", props.location.state.results)
   return (
     <div>
-      <h1>hej bagge</h1>
+        <h2>Country: {results.country}</h2><h2>City: {results.city}</h2><h2>Dato From: {results.datoF}</h2><h2>Dato To {results.datoT}</h2>
     </div>
   );
 }
