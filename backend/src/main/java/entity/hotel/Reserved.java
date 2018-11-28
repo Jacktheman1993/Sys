@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,6 +21,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -30,12 +33,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Reserved.findAll", query = "SELECT r FROM Reserved r")
+    , @NamedQuery(name = "Reserved.findById", query = "SELECT r FROM Reserved r WHERE r.id = :id")
     , @NamedQuery(name = "Reserved.findByCheckIn", query = "SELECT r FROM Reserved r WHERE r.checkIn = :checkIn")
     , @NamedQuery(name = "Reserved.findByCheckOut", query = "SELECT r FROM Reserved r WHERE r.checkOut = :checkOut")
-    , @NamedQuery(name = "Reserved.findById", query = "SELECT r FROM Reserved r WHERE r.id = :id")})
+    , @NamedQuery(name = "Reserved.findByCustomer", query = "SELECT r FROM Reserved r WHERE r.customer = :customer")})
 public class Reserved implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Column(name = "check_in")
@@ -46,11 +55,11 @@ public class Reserved implements Serializable {
     @Column(name = "check_out")
     @Temporal(TemporalType.DATE)
     private Date checkOut;
-    @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id")
-    private Integer id;
+    @Size(min = 1, max = 45)
+    @Column(name = "customer")
+    private String customer;
     @JoinColumn(name = "room_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Room roomId;
@@ -62,10 +71,19 @@ public class Reserved implements Serializable {
         this.id = id;
     }
 
-    public Reserved(Integer id, Date checkIn, Date checkOut) {
+    public Reserved(Integer id, Date checkIn, Date checkOut, String customer) {
         this.id = id;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
+        this.customer = customer;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Date getCheckIn() {
@@ -84,12 +102,12 @@ public class Reserved implements Serializable {
         this.checkOut = checkOut;
     }
 
-    public Integer getId() {
-        return id;
+    public String getCustomer() {
+        return customer;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCustomer(String customer) {
+        this.customer = customer;
     }
 
     public Room getRoomId() {

@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -32,6 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Hotel.findAll", query = "SELECT h FROM Hotel h")
+    , @NamedQuery(name = "Hotel.findById", query = "SELECT h FROM Hotel h WHERE h.id = :id")
     , @NamedQuery(name = "Hotel.findByName", query = "SELECT h FROM Hotel h WHERE h.name = :name")
     , @NamedQuery(name = "Hotel.findByDescription", query = "SELECT h FROM Hotel h WHERE h.description = :description")
     , @NamedQuery(name = "Hotel.findByAddresse", query = "SELECT h FROM Hotel h WHERE h.addresse = :addresse")
@@ -40,6 +43,10 @@ public class Hotel implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -47,7 +54,7 @@ public class Hotel implements Serializable {
     private String name;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 200)
     @Column(name = "description")
     private String description;
     @Basic(optional = false)
@@ -63,21 +70,30 @@ public class Hotel implements Serializable {
     @JoinColumn(name = "country_and_city_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private CountryAndCity countryAndCityId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hotel")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hotelId")
     private Collection<Room> roomCollection;
 
     public Hotel() {
     }
 
-    public Hotel(String name) {
-        this.name = name;
+    public Hotel(Integer id) {
+        this.id = id;
     }
 
-    public Hotel(String name, String description, String addresse, String currency) {
+    public Hotel(Integer id, String name, String description, String addresse, String currency) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.addresse = addresse;
         this.currency = currency;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -132,7 +148,7 @@ public class Hotel implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (name != null ? name.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -143,7 +159,7 @@ public class Hotel implements Serializable {
             return false;
         }
         Hotel other = (Hotel) object;
-        if ((this.name == null && other.name != null) || (this.name != null && !this.name.equals(other.name))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -151,7 +167,7 @@ public class Hotel implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.hotel.Hotel[ name=" + name + " ]";
+        return "entity.hotel.Hotel[ id=" + id + " ]";
     }
     
 }

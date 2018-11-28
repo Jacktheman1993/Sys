@@ -5,9 +5,12 @@
  */
 package facade;
 
+import DTO.DTOhotel;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -21,16 +24,16 @@ public class FacadeHotel {
         this.emf = emf;
     }
 
-    
-    
-    
-    private List<String> getHotels() {
+    public List<DTOhotel> getHotels() {
 
         EntityManager em = emf.createEntityManager();
-
+        List<DTOhotel> list = null;
         try {
-
-            return null;
+em.getTransaction().begin();
+           
+            TypedQuery<DTOhotel> query  = em.createQuery("SELECT new DTO.DTOhotel(h.name, h.description, h.addresse, h.currency) FROM Hotel h", DTOhotel.class);
+            list = query.getResultList();
+            return list;
         } finally {
             em.close();
         }

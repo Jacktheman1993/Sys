@@ -6,12 +6,15 @@
 package entity.hotel;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -32,17 +35,19 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Room.findAll", query = "SELECT r FROM Room r")
-    , @NamedQuery(name = "Room.findById", query = "SELECT r FROM Room r WHERE r.roomPK.id = :id")
+    , @NamedQuery(name = "Room.findById", query = "SELECT r FROM Room r WHERE r.id = :id")
     , @NamedQuery(name = "Room.findByName", query = "SELECT r FROM Room r WHERE r.name = :name")
     , @NamedQuery(name = "Room.findByBed", query = "SELECT r FROM Room r WHERE r.bed = :bed")
     , @NamedQuery(name = "Room.findByDescription", query = "SELECT r FROM Room r WHERE r.description = :description")
-    , @NamedQuery(name = "Room.findByPrice", query = "SELECT r FROM Room r WHERE r.price = :price")
-    , @NamedQuery(name = "Room.findByHotelName", query = "SELECT r FROM Room r WHERE r.roomPK.hotelName = :hotelName")})
+    , @NamedQuery(name = "Room.findByPrice", query = "SELECT r FROM Room r WHERE r.price = :price")})
 public class Room implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected RoomPK roomPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -54,44 +59,41 @@ public class Room implements Serializable {
     private int bed;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 200)
     @Column(name = "description")
     private String description;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "price")
-    private int price;
+    private BigDecimal price;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "roomId")
     private Collection<Reserved> reservedCollection;
-    @JoinColumn(name = "hotel_name", referencedColumnName = "name", insertable = false, updatable = false)
+    @JoinColumn(name = "hotel_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Hotel hotel;
+    private Hotel hotelId;
 
     public Room() {
     }
 
-    public Room(RoomPK roomPK) {
-        this.roomPK = roomPK;
+    public Room(Integer id) {
+        this.id = id;
     }
 
-    public Room(RoomPK roomPK, String name, int bed, String description, int price) {
-        this.roomPK = roomPK;
+    public Room(Integer id, String name, int bed, String description, BigDecimal price) {
+        this.id = id;
         this.name = name;
         this.bed = bed;
         this.description = description;
         this.price = price;
     }
 
-    public Room(int id, String hotelName) {
-        this.roomPK = new RoomPK(id, hotelName);
+    public Integer getId() {
+        return id;
     }
 
-    public RoomPK getRoomPK() {
-        return roomPK;
-    }
-
-    public void setRoomPK(RoomPK roomPK) {
-        this.roomPK = roomPK;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -118,11 +120,11 @@ public class Room implements Serializable {
         this.description = description;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -135,18 +137,18 @@ public class Room implements Serializable {
         this.reservedCollection = reservedCollection;
     }
 
-    public Hotel getHotel() {
-        return hotel;
+    public Hotel getHotelId() {
+        return hotelId;
     }
 
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
+    public void setHotelId(Hotel hotelId) {
+        this.hotelId = hotelId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (roomPK != null ? roomPK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -157,7 +159,7 @@ public class Room implements Serializable {
             return false;
         }
         Room other = (Room) object;
-        if ((this.roomPK == null && other.roomPK != null) || (this.roomPK != null && !this.roomPK.equals(other.roomPK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -165,7 +167,7 @@ public class Room implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.hotel.Room[ roomPK=" + roomPK + " ]";
+        return "entity.hotel.Room[ id=" + id + " ]";
     }
     
 }

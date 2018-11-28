@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -30,22 +32,22 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "CountryAndCity.findAll", query = "SELECT c FROM CountryAndCity c")
-    , @NamedQuery(name = "CountryAndCity.findByCountry", query = "SELECT c FROM CountryAndCity c WHERE c.country = :country")
     , @NamedQuery(name = "CountryAndCity.findById", query = "SELECT c FROM CountryAndCity c WHERE c.id = :id")
+    , @NamedQuery(name = "CountryAndCity.findByCountry", query = "SELECT c FROM CountryAndCity c WHERE c.country = :country")
     , @NamedQuery(name = "CountryAndCity.findByCity", query = "SELECT c FROM CountryAndCity c WHERE c.city = :city")})
 public class CountryAndCity implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "country")
     private String country;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id")
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -67,20 +69,20 @@ public class CountryAndCity implements Serializable {
         this.city = city;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getCity() {
