@@ -6,7 +6,6 @@ export default class Results extends Component {
 
         }
     }
-
     //     function expandResult(props, index) {
     //     return (
 
@@ -17,7 +16,7 @@ export default class Results extends Component {
         console.log(this.props);
         return (
             <div className='resultListContainer'>
-
+                <img style={{height: 100, width: 100}} src="img/1.jpg" />
                 <ResultList
                     resultList={this.props.location.state.results}
                 />
