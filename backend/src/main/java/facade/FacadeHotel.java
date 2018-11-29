@@ -5,7 +5,7 @@
  */
 package facade;
 
-import DTO.DTOhotel;
+import DTO.DTOHotel;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -24,14 +24,14 @@ public class FacadeHotel {
         this.emf = emf;
     }
 
-    public List<DTOhotel> getHotels() {
+    public List<DTOHotel> getHotels() {
 
         EntityManager em = emf.createEntityManager();
-        List<DTOhotel> list = null;
+        List<DTOHotel> list = null;
         try {
-em.getTransaction().begin();
-           
-            TypedQuery<DTOhotel> query  = em.createQuery("SELECT new DTO.DTOhotel(h.name, h.description, h.addresse, h.currency) FROM Hotel h", DTOhotel.class);
+            
+
+            TypedQuery<DTOHotel> query = em.createQuery("SELECT new DTO.DTOHotel(h) FROM Hotel h", DTOHotel.class);
             list = query.getResultList();
             return list;
         } finally {
@@ -40,4 +40,21 @@ em.getTransaction().begin();
 
     }
 
+    public List<DTOHotel> getHotelsSearch(String country , String city) {
+     
+        EntityManager em = emf.createEntityManager();
+        List<DTOHotel> list = null;
+        try {
+            
+
+            TypedQuery<DTOHotel> query = em.createQuery("SELECT new DTO.DTOHotel(h) FROM Hotel h WHERE h.countryAndCityId.city =:city AND h.countryAndCityId.country =:country", DTOHotel.class);
+             query.setParameter("city", city);
+               query.setParameter("country", country);
+            list = query.getResultList();
+            return list;
+        } finally {
+            em.close();
+        }
+
+    }
 }

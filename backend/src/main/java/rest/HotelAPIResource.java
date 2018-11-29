@@ -48,7 +48,14 @@ public class HotelAPIResource {
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllHotels() {
-        return Response.ok(gson.toJson(fc.getHotels())).build();
+        
+   
+        
+        String json = gson.toJson(fc.getHotels());
+       
+        
+        return Response.ok(json).build();
+        
     }
 
     /**
@@ -61,13 +68,13 @@ public class HotelAPIResource {
      * @param dateT The date to which the user wants to look for
      * @return a json string with the hotel info
      */
-    @GET
-    @Path("search")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getHotelsSearch(@QueryParam("country") String country, @QueryParam("city") String city, @QueryParam("dateF") Date dateF, @QueryParam("dateT") Date dateT) {
-        //return Response.ok(gson.toJson(fc.getHotelsSearch())).build();
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
+//    @GET
+//    @Path("search")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response getHotelsSearch(@QueryParam("country") String country, @QueryParam("city") String city, @QueryParam("dateF") Date dateF, @QueryParam("dateT") Date dateT) {
+//        return Response.ok(gson.toJson(fc.getHotelsSearch())).build();
+//       
+//    }
 
     /**
      * THIS IS ONLY MEANT FOR IF WE CHANGE THE STRUCTURE OF THE API TO SEND A 
