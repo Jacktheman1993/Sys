@@ -6,6 +6,8 @@
 package facade;
 
 import DTO.DTOHotel;
+import DTO.DTORoom;
+import entity.hotel.Room;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -57,4 +59,20 @@ public class FacadeHotel {
         }
 
     }
+    
+    public List<DTORoom> getRooms(Integer hotelID){
+        
+        EntityManager em = emf.createEntityManager();
+        List<DTORoom> list= null;
+        try{
+            TypedQuery<DTORoom> query = em.createQuery("SELECT new DTO.DTORoom(r) From Room r WHERE r.hotelId.id =:hotelID",DTORoom.class);
+            query.setParameter("hotelID", hotelID);
+            list = query.getResultList();
+            return list;
+        }finally{
+            em.close();
+        }
+    }
+    
+    
 }

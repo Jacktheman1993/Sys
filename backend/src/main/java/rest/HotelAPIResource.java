@@ -7,6 +7,7 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import entity.hotel.CountryAndCity;
 import facade.FacadeHotel;
 import java.util.Date;
 import javax.persistence.Persistence;
@@ -70,9 +71,13 @@ public class HotelAPIResource {
      */
     @GET
     @Path("search")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getHotelsSearch(@QueryParam("country") String country, @QueryParam("city") String city, @QueryParam("dateF") Date dateF, @QueryParam("dateT") Date dateT) {
-        return Response.ok(gson.toJson(fc.getHotelsSearch(country, city))).build();
+    public Response getHotelsSearch(String json) {
+        
+        CountryAndCity countryandcity = gson.fromJson(json, CountryAndCity.class);
+        
+        return Response.ok(gson.toJson(fc.getHotelsSearch(countryandcity.getCountry(), countryandcity.getCity()))).build();
        
     }
 

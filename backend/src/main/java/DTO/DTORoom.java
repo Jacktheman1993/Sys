@@ -29,13 +29,12 @@ public class DTORoom {
     public DTORoom() {
     }
 
-    DTORoom(Room room) {
+   public DTORoom(Room room) {
         this.id = room.getId();
         this.name = room.getName();
         this.bed = room.getBed();
         this.description = room.getDescription();
-        this.price = room.getPrice();
-      
+        this.price = room.getPrice();      
         this.Reserveds = map(room.getReservedCollection());
     }
 

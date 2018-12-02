@@ -21,24 +21,20 @@ public class DTOHotel {
     private String description;
     private String addresse;
     private String currency;
-    private Collection<DTORoom> room;
+    private Integer hotelid;
+
+    
 
     public DTOHotel(Hotel hotel) {
         this.name = hotel.getName();
         this.description = hotel.getDescription();
         this.addresse = hotel.getAddresse();
         this.currency = hotel.getCurrency();
-        this.room = map(hotel.getRoomCollection());
+      
+        this.hotelid = hotel.getId();
 
     }
 
-    private Collection<DTORoom> map(Collection<Room> roomCollection) {
-        Collection<DTORoom> dtos = new ArrayList<>();
-        for (Room room : roomCollection) {
-            dtos.add(new DTORoom(room));
-        }
-        return dtos;
-    }
 
     public String getName() {
         return name;
@@ -56,13 +52,9 @@ public class DTOHotel {
         return currency;
     }
 
-    public Collection<DTORoom> getRoomCollection() {
-        return room;
-    }
-
     @Override
     public String toString() {
-        return "DTOhotel{" + "name=" + name + ", description=" + description + ", addresse=" + addresse + ", currency=" + currency + ", rooms=" + room + '}';
+        return "DTOhotel{" + "name=" + name + ", description=" + description + ", addresse=" + addresse + ", currency=" + currency + '}';
     }
 
 }

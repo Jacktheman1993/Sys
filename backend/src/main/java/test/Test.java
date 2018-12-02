@@ -18,8 +18,8 @@ public class Test {
         
         FacadeHotel fh = new FacadeHotel(Persistence.createEntityManagerFactory("pu"));
         
-      System.out.println(fh.getHotelsSearch("Canada","Toronto"));
-
+      //System.out.println(fh.getHotelsSearch("Canada","Toronto"));
+        System.out.println(fh.getRooms(1).size());
         
     }
 }
