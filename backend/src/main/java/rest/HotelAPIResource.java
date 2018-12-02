@@ -5,6 +5,7 @@
  */
 package rest;
 
+import DTO.DTORoom;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entity.hotel.CountryAndCity;
@@ -22,6 +23,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 /**
  * REST Web Service
@@ -49,14 +51,16 @@ public class HotelAPIResource {
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllHotels() {
-        
-   
-        
         String json = gson.toJson(fc.getHotels());
-       
-        
         return Response.ok(json).build();
-        
+    }
+
+    @GET
+    @Path("search/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRooms(@PathParam("id") Integer id) {
+        List<DTORoom> dtos = fc.getRooms(id);
+        return Response.ok(gson.toJson(dtos)).build();
     }
 
     /**
@@ -74,20 +78,21 @@ public class HotelAPIResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getHotelsSearch(String json) {
-        
+
         CountryAndCity countryandcity = gson.fromJson(json, CountryAndCity.class);
-        
+
         return Response.ok(gson.toJson(fc.getHotelsSearch(countryandcity.getCountry(), countryandcity.getCity()))).build();
-       
+
     }
 
     /**
-     * THIS IS ONLY MEANT FOR IF WE CHANGE THE STRUCTURE OF THE API TO SEND A 
-     * SMALLER AMOUNT OF INFO TO THE FRONTEND TO SHOW IN THE RESULT LIST AND 
-     * THEN MAKE AN ADDITIONAL CALL WHEN LOOKING AT DETAILS ABOUT THE HOTEL SELECTED
-     * 
+     * THIS IS ONLY MEANT FOR IF WE CHANGE THE STRUCTURE OF THE API TO SEND A
+     * SMALLER AMOUNT OF INFO TO THE FRONTEND TO SHOW IN THE RESULT LIST AND
+     * THEN MAKE AN ADDITIONAL CALL WHEN LOOKING AT DETAILS ABOUT THE HOTEL
+     * SELECTED
+     *
      * Returns a specific hotel in the database, complete with rooms attached.
-     * 
+     *
      * @return a json string with the hotel info
      */
 //    @GET
