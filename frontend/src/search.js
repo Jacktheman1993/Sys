@@ -21,7 +21,7 @@ export default class Search extends Component {
         console.log(typeof datoF1);
         if (datoT2 < datoF1) {
             console.log("im here!");
-            return this.props.error('datoT < datoF')
+            return this.props.error('datoT > datoF')
 
         }
 
@@ -37,8 +37,7 @@ export default class Search extends Component {
         this.props.history.push({
             pathname: "/results",
             state: { results: this.state.results,
-              searchQuery: this.state.newSearch
-            }
+            searchQuery: this.state.newSearch}
         })
 
     }
@@ -61,9 +60,9 @@ export default class Search extends Component {
                     <h2>City</h2>
                     <input placeholder="City" id="city" name="city" value={this.state.newSearch.city} onChange={this.inputVal} />
                     <h2>Dato From</h2>
-                    <input type="date" placeholder="Dato From" id="datoF" name="datoF" value={this.state.newSearch.datoF} onChange={this.inputVal} />
+                    <input type="date" placeholder="Dato To" id="datoF" name="datoF" value={this.state.newSearch.datoF} onChange={this.inputVal} />
                     <h2>Dato To</h2>
-                    <input type="date" placeholder="Dato To" id="datoT" name="datoT" value={this.state.newSearch.datoT} onChange={this.inputVal} />
+                    <input type="date" placeholder="Dato From" id="datoT" name="datoT" value={this.state.newSearch.datoT} onChange={this.inputVal} />
 
                     <button>Søg</button>
                 </form>

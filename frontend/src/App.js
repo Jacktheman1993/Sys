@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import './App.css';
 import Search from './search';
 import Results from './results';
-import Rooms from './rooms';
+import Hotel from './hotel';
 
 class Nav extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class Nav extends Component {
 .
           <Route exact path="/" render={(props) => <Search  error={this.error} {...props}/>} />
           <Route path ="/results" render={(props) => <Results  error={this.error} {...props}/>} />
-          <Route path ="/rooms" render= {(props) => <Rooms error={this.error} {...props}/>} />
+          <Route path ="/hotel" render={(props) => <Hotel  error={this.error} {...props}/>} />
         </div>
       </Router>
     )
