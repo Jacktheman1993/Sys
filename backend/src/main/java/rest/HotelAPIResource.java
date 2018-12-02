@@ -68,13 +68,13 @@ public class HotelAPIResource {
      * @param dateT The date to which the user wants to look for
      * @return a json string with the hotel info
      */
-//    @GET
-//    @Path("search")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getHotelsSearch(@QueryParam("country") String country, @QueryParam("city") String city, @QueryParam("dateF") Date dateF, @QueryParam("dateT") Date dateT) {
-//        return Response.ok(gson.toJson(fc.getHotelsSearch())).build();
-//       
-//    }
+    @GET
+    @Path("search")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getHotelsSearch(@QueryParam("country") String country, @QueryParam("city") String city, @QueryParam("dateF") Date dateF, @QueryParam("dateT") Date dateT) {
+        return Response.ok(gson.toJson(fc.getHotelsSearch(country, city))).build();
+       
+    }
 
     /**
      * THIS IS ONLY MEANT FOR IF WE CHANGE THE STRUCTURE OF THE API TO SEND A 
