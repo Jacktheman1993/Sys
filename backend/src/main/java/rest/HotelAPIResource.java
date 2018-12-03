@@ -77,11 +77,9 @@ public class HotelAPIResource {
     @Path("search")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getHotelsSearch(String json) {
+    public Response getHotelsSearch(@QueryParam("country") String country, @QueryParam("city") String city) {
 
-        CountryAndCity countryandcity = gson.fromJson(json, CountryAndCity.class);
-
-        return Response.ok(gson.toJson(fc.getHotelsSearch(countryandcity.getCountry(), countryandcity.getCity()))).build();
+        return Response.ok(gson.toJson(fc.getHotelsSearch(country, city))).build();
 
     }
 
