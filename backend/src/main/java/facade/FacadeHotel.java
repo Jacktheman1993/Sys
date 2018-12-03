@@ -7,6 +7,7 @@ package facade;
 
 import DTO.DTOHotel;
 import DTO.DTORoom;
+import entity.hotel.Reserved;
 import entity.hotel.Room;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -31,7 +32,6 @@ public class FacadeHotel {
         EntityManager em = emf.createEntityManager();
         List<DTOHotel> list = null;
         try {
-            
 
             TypedQuery<DTOHotel> query = em.createQuery("SELECT new DTO.DTOHotel(h) FROM Hotel h", DTOHotel.class);
             list = query.getResultList();
@@ -42,16 +42,15 @@ public class FacadeHotel {
 
     }
 
-    public List<DTOHotel> getHotelsSearch(String country , String city) {
-     
+    public List<DTOHotel> getHotelsSearch(String country, String city) {
+
         EntityManager em = emf.createEntityManager();
         List<DTOHotel> list = null;
         try {
-            
 
             TypedQuery<DTOHotel> query = em.createQuery("SELECT new DTO.DTOHotel(h) FROM Hotel h WHERE h.countryAndCityId.city =:city AND h.countryAndCityId.country =:country", DTOHotel.class);
-             query.setParameter("city", city);
-               query.setParameter("country", country);
+            query.setParameter("city", city);
+            query.setParameter("country", country);
             list = query.getResultList();
             return list;
         } finally {
@@ -59,20 +58,34 @@ public class FacadeHotel {
         }
 
     }
-    
-    public List<DTORoom> getRooms(Integer hotelID){
-        
+
+    public List<DTORoom> getRooms(Integer hotelID) {
+
         EntityManager em = emf.createEntityManager();
-        List<DTORoom> list= null;
-        try{
-            TypedQuery<DTORoom> query = em.createQuery("SELECT new DTO.DTORoom(r) From Room r WHERE r.hotelId.id =:hotelID",DTORoom.class);
+        List<DTORoom> list = null;
+        try {
+            TypedQuery<DTORoom> query = em.createQuery("SELECT new DTO.DTORoom(r) From Room r WHERE r.hotelId.id =:hotelID", DTORoom.class);
             query.setParameter("hotelID", hotelID);
             list = query.getResultList();
             return list;
-        }finally{
+        } finally {
             em.close();
         }
     }
-    
-    
+
+    public boolean book(Reserved reserved) {
+        EntityManager em = emf.createEntityManager();
+        
+        try {
+            em.getTransaction().begin();
+            em.persist(reserved);
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            return false;
+        } finally {
+            em.close();
+        }
+
+    }
 }

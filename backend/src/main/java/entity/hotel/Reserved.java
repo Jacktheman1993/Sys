@@ -71,8 +71,9 @@ public class Reserved implements Serializable {
         this.id = id;
     }
 
-    public Reserved(Integer id, Date checkIn, Date checkOut, String customer) {
-        this.id = id;
+
+      public Reserved(Room roomId, Date checkIn, Date checkOut, String customer) {
+        this.roomId = roomId;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.customer = customer;
@@ -140,7 +141,8 @@ public class Reserved implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.hotel.Reserved[ id=" + id + " ]";
+        return "Reserved{" + "id=" + id + ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", customer=" + customer + ", roomId=" + roomId + '}';
     }
+
     
 }
