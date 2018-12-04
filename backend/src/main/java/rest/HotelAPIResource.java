@@ -54,6 +54,24 @@ public class HotelAPIResource {
         String json = gson.toJson(fc.getHotels());
         return Response.ok(json).build();
     }
+    
+        /**
+     * Returns all hotels matching the query params in the database, complete
+     * with rooms attached.
+     *
+     * @param country The name of the country to look for
+     * @param city The name of the city to look for
+     * @param dateF The date from which the user wants to look for
+     * @param dateT The date to which the user wants to look for
+     * @return a json string with the hotel info
+     */
+    @GET
+    @Path("search")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getHotelsSearch(@QueryParam("country") String country, @QueryParam("city") String city) {
+         return Response.ok(gson.toJson(fc.getHotelsSearch(country, city))).build();
+     }
+
 
     @GET
     @Path("search/{id}")
