@@ -37,7 +37,6 @@ public class FacadeHotel {
         } finally {
             em.close();
         }
-
     }
 
     public List<DTOHotel> getHotelsSearch(String country, String city) {
@@ -52,7 +51,6 @@ public class FacadeHotel {
         } finally {
             em.close();
         }
-
     }
 
     public List<DTORoom> getRooms(Integer hotelID) {
@@ -80,6 +78,5 @@ public class FacadeHotel {
         } finally {
             em.close();
         }
-
     }
 }

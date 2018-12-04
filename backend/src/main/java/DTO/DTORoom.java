@@ -44,7 +44,6 @@ public class DTORoom {
         for (Reserved reserved : reservedCollection) {
             dtos.add(new DTOReserved(reserved));
         }}
-        
         return dtos;
     }
 
