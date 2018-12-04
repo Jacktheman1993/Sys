@@ -1,84 +1,77 @@
 import React, { Component } from 'react'
+import facade from './apiFacade'
+
 export default class Results extends Component {
     constructor(props) {
         super(props);
+
+        const params = new URLSearchParams(props.location.search);
         this.state = {
-            searchQuery: this.props.location.state.searchQuery,
-            specific: {
-                id: "", name: "", address: "", currency: "", hotelDescription: "",
-                rooms: []
-            },
+            results: [],
+            country: params.get('country'),
+            city: params.get('city'),
+            dateF: params.get('dateF'),
+            dateT: params.get('dateT')
         }
         this.goToHotel = this.goToHotel.bind(this);
     }
 
+
     goToHotel = (evt) => {
         evt.preventDefault();
-        this.setState({ specific: JSON.parse(evt.target.elements.result.value) }, function () {
-            // var url = new URL("https://INSERT API PATH HERE/api/hotel/search/{this.state.specific.id}"),
-            // fetch(url)
-            // .then(res => res.json())
-            // .then(data => rooms = data)
-            // .then(() => console.log(rooms))
-            this.setState({
-                rooms: [
-                    { id: '1', name: 'suite', bed: '3/4 gulvmåtte', description: 'Smukt værelse med extra grill', price: '5mil penge' },
-                    { id: '2', name: 'Det lille hus', bed: '5', description: 'Fantastisk selvstående bygning med god ventilation', price: '200' },
-                    { id: '3', name: 'rum', bed: '1 dobbeltseng', description: 'Lyst og godt værelse med udsigt over (indsæt noget smukt)', price: '42' }
-                ]
-            }, function () {
-                console.log(this.state.specific);
-                console.log(this.state.rooms);
-                this.props.history.push({
-                    pathname: "/hotel",
-                    state: {
-                        specific: this.state.specific,
-                        rooms: this.state.rooms
-                    }
-                })
+        this.props.history.push({
+            pathname: "/hotel",
+            state: {
+                specific: JSON.parse(evt.target.result.value)
             }
-            )
-
-
-        });
+        })
     }
 
+    async componentDidMount() {
+        const search = await facade.searchHotels(this.props.location.search)
+            .then((response) => this.setState({ results: response }));
+    }
+    
     render() {
-        let ResultList = this.ResultLister()
-        console.log(this.props);
-        return (
-            <div className='resultListContainer'>
-                Country: {this.props.location.state.searchQuery.country}, City: {this.props.location.state.searchQuery.city}, Date From: {this.props.location.state.searchQuery.dateF}, Date To: {this.props.location.state.searchQuery.dateT}
+        if (this.state.results.length > 0) {
+            let ResultList = this.ResultLister()
+            return (
+                <div className='resultListContainer'>
+                    Country: {this.state.country}, City: {this.state.city}, Date From: {this.state.dateF}, Date To: {this.state.dateT}
 
-                {ResultList}
-                <img style={{ height: 100, width: 100 }} src="img/1.jpg" />
-            </div>
-        )
+                    {ResultList}
+                </div>
+            )
+        }
+        else {
+            return <h1>Loading...</h1>
+        }
     }
 
     ResultLister() {
-        return this.props.location.state.results.map(result => {
-            return (<div className="row" key={result.id}>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>
-                                {result.name}
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{result.hotelDescription}</td>
+        return (
+            <table className='table'>
+                <thead className='thead-dark'>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.state.results.map(result => (
+                        <tr key={result.id}>
+                            <td>{result.name}</td>
+                            <td>{result.description}</td>
                             <td><form onSubmit={this.goToHotel}>
                                 <input type='hidden' name="result" value={JSON.stringify(result)}>
                                 </input>
                                 <button>See more info</button>
                             </form></td>
                         </tr>
-                    </tbody>
-                </table>
-            </div>);
-        });
-    }
+                    ))}
+                </tbody>
+            </table>
+        );
+    };
 }

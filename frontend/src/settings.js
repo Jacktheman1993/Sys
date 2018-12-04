@@ -1,1 +1,1 @@
-export default URL = "https://www.cph-nr80.dk/Ca3Backend/";
+export default URL = "Https://cph-nr80.dk/sysexam/api/hotel";

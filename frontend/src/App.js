@@ -17,7 +17,7 @@ class Nav extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div className='container text-center'>
 
           <ul className="header">
             <li>

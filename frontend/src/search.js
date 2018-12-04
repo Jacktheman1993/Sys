@@ -4,10 +4,6 @@ export default class Search extends Component {
         super(props);
         this.state = {
             newSearch: { country: "", city: "", datoF: "", datoT: "" },
-            results: [
-                {id: '1', name: 'Hilton Hotel', address: 'Vejvej 1', currency: 'penge', hotelDescription: 'Standard Hilton hotel'}, 
-                {id: '2', name: 'Foo Hotel', address: 'Barvej 65', currency: 'Dubloner', hotelDescription: 'Random ship that docked'}, 
-                {id: '3', name: 'Bar Hotel', address: 'Foovej 32', currency: 'øl', hotelDescription: 'Actually not a hotel but a bar'}]
         }
     }
     search = (evt) => {
@@ -33,10 +29,12 @@ export default class Search extends Component {
         // .then(data => results = data)
         // .then(() => console.log(results))
 
+        const searchQuery = this.state.newSearch
+        
         this.props.history.push({
             pathname: "/results",
-            state: { results: this.state.results,
-            searchQuery: this.state.newSearch}
+            search: `?country=${searchQuery.country}&city=${searchQuery.city}`,
+            state: { searchQuery }
         })
 
     }
@@ -63,7 +61,7 @@ export default class Search extends Component {
                     <h2>Dato To</h2>
                     <input type="date" placeholder="Dato From" id="datoT" name="datoT" value={this.state.newSearch.datoT} onChange={this.inputVal} />
 
-                    <button>Søg</button>
+                    <button className='btn btn-info btn-block'>Søg</button>
                 </form>
                 <p>{JSON.stringify(this.state.newSearch)}</p>
             </div>
