@@ -75,7 +75,6 @@ public class HotelAPIResource {
      */
     @GET
     @Path("search")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getHotelsSearch(@QueryParam("country") String country, @QueryParam("city") String city) {
 
