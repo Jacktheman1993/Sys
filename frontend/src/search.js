@@ -4,10 +4,7 @@ export default class Search extends Component {
         super(props);
         this.state = {
             newSearch: { country: "", city: "", datoF: "", datoT: "" },
-            results: [
-                {id: '1', name: 'Hilton Hotel', address: 'Vejvej 1', currency: 'penge', hotelDescription: 'Standard Hilton hotel'}, 
-                {id: '2', name: 'Foo Hotel', address: 'Barvej 65', currency: 'Dubloner', hotelDescription: 'Random ship that docked'}, 
-                {id: '3', name: 'Bar Hotel', address: 'Foovej 32', currency: 'øl', hotelDescription: 'Actually not a hotel but a bar'}]
+            results: []
         }
     }
     search = (evt) => {
