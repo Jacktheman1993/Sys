@@ -28,26 +28,21 @@ public class FacadeHotel {
     }
 
     public List<DTOHotel> getHotels() {
-
         EntityManager em = emf.createEntityManager();
         List<DTOHotel> list = null;
         try {
-
             TypedQuery<DTOHotel> query = em.createQuery("SELECT new DTO.DTOHotel(h) FROM Hotel h", DTOHotel.class);
             list = query.getResultList();
             return list;
         } finally {
             em.close();
         }
-
     }
 
     public List<DTOHotel> getHotelsSearch(String country, String city) {
-
         EntityManager em = emf.createEntityManager();
         List<DTOHotel> list = null;
         try {
-
             TypedQuery<DTOHotel> query = em.createQuery("SELECT new DTO.DTOHotel(h) FROM Hotel h WHERE h.countryAndCityId.city =:city AND h.countryAndCityId.country =:country", DTOHotel.class);
             query.setParameter("city", city);
             query.setParameter("country", country);
@@ -56,11 +51,9 @@ public class FacadeHotel {
         } finally {
             em.close();
         }
-
     }
 
     public List<DTORoom> getRooms(Integer hotelID) {
-
         EntityManager em = emf.createEntityManager();
         List<DTORoom> list = null;
         try {
@@ -75,7 +68,6 @@ public class FacadeHotel {
 
     public boolean book(Reserved reserved) {
         EntityManager em = emf.createEntityManager();
-        
         try {
             em.getTransaction().begin();
             em.persist(reserved);
@@ -86,6 +78,5 @@ public class FacadeHotel {
         } finally {
             em.close();
         }
-
     }
 }

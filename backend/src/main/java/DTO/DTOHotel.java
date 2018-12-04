@@ -23,18 +23,13 @@ public class DTOHotel {
     private String currency;
     private Integer hotelid;
 
-    
-
     public DTOHotel(Hotel hotel) {
         this.name = hotel.getName();
         this.description = hotel.getDescription();
         this.addresse = hotel.getAddresse();
         this.currency = hotel.getCurrency();
-      
         this.hotelid = hotel.getId();
-
     }
-
 
     public String getName() {
         return name;

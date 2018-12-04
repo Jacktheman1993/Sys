@@ -27,7 +27,6 @@ public class DTOReserved {
         this.checkIn = reserved.getCheckIn();
         this.checkOut = reserved.getCheckOut();
         this.customer = reserved.getCustomer();
-
     }
 
     public Integer getId() {
