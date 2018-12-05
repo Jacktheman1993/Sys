@@ -1,0 +1,32 @@
+.searchStyle{
+    background-color: white;
+    width: 90%;
+    height: 90%;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 1%;
+    border-radius: 30px;
+    border: 5px solid;
+}
+.sForm{
+    margin: 2px;
+}
+input{
+    width: 200px;
+    height: 20px;
+    border: 1px solid #000;
+    padding: 5px;
+    border-radius: 30px;
+}
+h2{
+    display: block;
+    margin: 0 0 3px;
+    font-size: 1.2em;
+}
+label{
+    width: 200px;
+    float: left;
+    margin: 0 20px 0 0;
+}

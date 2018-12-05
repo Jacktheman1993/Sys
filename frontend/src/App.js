@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-import './App.css';
+import './Styles/App.css';
 import Search from './search';
 import Results from './results';
 import Hotel from './hotel';
@@ -16,9 +16,9 @@ class Nav extends Component {
   }
   render() {
     return (
+      
       <Router>
-        <div className='container text-center'>
-
+        <div>
           <ul className="header">
             <li>
               <NavLink exact to="/">Home</NavLink>

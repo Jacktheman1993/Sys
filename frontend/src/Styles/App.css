@@ -7,24 +7,21 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  
 }
 ul.header {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  margin: 5px;
  }
  
- ul.header li { float: left;}
+ ul.header li { 
+   float: left;
+   background-color: black;
+   border-radius: 30px;
+}
  
  ul.header li a {
   display: block;
@@ -32,7 +29,13 @@ ul.header {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  border-radius: 30px;
  }
- ul.header li a:hover:not(.active) { background-color: #111;}
+ ul.header li a:hover:not(.active) { background-color:black;}
  
  .active { background-color: #4CAF50;}
+
+ .formBox{
+   max-width: 1000px;
+   max-height: 1000px;
+ }

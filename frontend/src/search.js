@@ -30,7 +30,7 @@ export default class Search extends Component {
         // .then(() => console.log(results))
 
         const searchQuery = this.state.newSearch
-        
+
         this.props.history.push({
             pathname: "/results",
             search: `?country=${searchQuery.country}&city=${searchQuery.city}`,
@@ -52,19 +52,28 @@ export default class Search extends Component {
         return (
             <div>
                 <form onSubmit={this.search}>
-                    <h2>Country</h2>
-                    <input placeholder="Country" id="country" name="country" value={this.state.newSearch.country} onChange={this.inputVal} />
-                    <h2>City</h2>
-                    <input placeholder="City" id="city" name="city" value={this.state.newSearch.city} onChange={this.inputVal} />
-                    <h2>Dato From</h2>
-                    <input type="date" placeholder="Dato To" id="datoF" name="datoF" value={this.state.newSearch.datoF} onChange={this.inputVal} />
-                    <h2>Dato To</h2>
-                    <input type="date" placeholder="Dato From" id="datoT" name="datoT" value={this.state.newSearch.datoT} onChange={this.inputVal} />
-
-                    <button className='btn btn-info btn-block'>Søg</button>
+                    <div className='row'>
+                        <div className='col'>
+                            <input className='form-control' placeholder="Country" id="country" name="country" value={this.state.newSearch.country} onChange={this.inputVal} />
+                        </div>
+                        <div className='col'>
+                            <input className='form-control' placeholder="City" id="city" name="city" value={this.state.newSearch.city} onChange={this.inputVal} />
+                        </div>
+                        <h2>Dato From</h2>
+                        <div className='col'>
+                            <input className='form-control' type="date" placeholder="Dato To" id="datoF" name="datoF" value={this.state.newSearch.datoF} onChange={this.inputVal} />
+                        </div>
+                        <h2>Dato To</h2>
+                        <div className='col'>
+                            <input className='form-control' type="date" placeholder="Dato From" id="datoT" name="datoT" value={this.state.newSearch.datoT} onChange={this.inputVal} />
+                        </div>
+                        <div className='col'>
+                            <button className='btn btn-lg btn-primary' >Søg</button>
+                        </div>
+                    </div>
                 </form>
-                <p>{JSON.stringify(this.state.newSearch)}</p>
             </div>
+
         )
     }
 }
