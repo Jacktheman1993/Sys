@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import facade from './apiFacade'
+import Results from './results';
 export default class Search extends Component {
     constructor(props) {
         super(props);
@@ -16,6 +17,7 @@ export default class Search extends Component {
     
     bookRoom = (evt) => {
         evt.preventDefault();
+        // alert("You Have Booked a room");
         this.props.history.push({
             pathname: "/booking",
             state: {
