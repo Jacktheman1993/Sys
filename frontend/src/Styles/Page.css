@@ -30,3 +30,9 @@ label{
     float: left;
     margin: 0 20px 0 0;
 }
+.footer{
+    width: 100px;
+    height: 100px;
+    background-color: black;
+    margin-top: 100px;
+}

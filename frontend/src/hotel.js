@@ -26,11 +26,11 @@ export default class Search extends Component {
     render() {
         let rooms = this.RoomMapper();
         return (
-            <div className='resultContainer'>
+            <div className='table-responsive'>
             <h2>Hotel: {this.state.specific.name}</h2>
             <h4>{this.state.specific.description}</h4>
-                <table className='table'>
-                    <thead>
+                <table className='table table-hover table-bordered table-dark'>
+                    <thead className='thead-light'>
                         <tr>
                             <th>Type</th>
                             <th>Description</th>
@@ -56,13 +56,13 @@ export default class Search extends Component {
                 {room.description}
             </td>
             <td>
-                {room.bed}
+                {room.bed} Beds
             </td>
             <td>
-                {room.price} {this.state.specific.currency}
+                {room.price},- {this.state.specific.currency}
             </td>
             <td><form onSubmit={this.bookRoom}>
-                <button>Book room</button>
+                <button className='btn btn btn-dark'>Book room</button>
             </form></td>
         </tr>);
     }

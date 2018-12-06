@@ -37,24 +37,26 @@ export default class Results extends Component {
             let ResultList = this.ResultLister()
             return (
                 <div className='resultListContainer'>
-                    Country: {this.state.country}, City: {this.state.city}, Date From: {this.state.dateF}, Date To: {this.state.dateT}
+                    <h2>Country: {this.state.country} && City: {this.state.city} && Date From: {this.state.dateF} && Date To: {this.state.dateT}</h2>
 
                     {ResultList}
                 </div>
             )
         }
         else {
-            return <h1>Loading...</h1>
+            return <h1>There are no hits with the selected search criteria. Please Search Again</h1>
         }
     }
 
     ResultLister() {
         return (
-            <table className='table'>
-                <thead className='thead-dark'>
+            <div className='table-responsive'>
+            <table className='table table-hover table-bordered table-dark'>
+                <thead className='thead-light'>
                     <tr>
                         <th>Name</th>
                         <th>Description</th>
+                        <th>Address</th>
                         <th>Details</th>
                     </tr>
                 </thead>
@@ -63,15 +65,17 @@ export default class Results extends Component {
                         <tr key={result.id}>
                             <td>{result.name}</td>
                             <td>{result.description}</td>
+                            <td>{result.addresse}</td>
                             <td><form onSubmit={this.goToHotel}>
                                 <input type='hidden' name="result" value={JSON.stringify(result)}>
                                 </input>
-                                <button>See more info</button>
+                                <button className='btn btn btn-dark'>See more info</button>
                             </form></td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            </div>
         );
     };
 }
