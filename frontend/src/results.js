@@ -10,8 +10,8 @@ export default class Results extends Component {
             results: [],
             country: params.get('country'),
             city: params.get('city'),
-            dateF: params.get('dateF'),
-            dateT: params.get('dateT')
+            dateF: this.props.location.state.datoF,
+            dateT: this.props.location.state.datoT
         }
         this.goToHotel = this.goToHotel.bind(this);
     }
