@@ -74,8 +74,8 @@ class ApiFacade {
       },
       body: JSON.stringify({
         roomID: bookingInfo.roomID,
-        dateF: bookingInfo.dateF,
-        dateT: bookingInfo.dateT,
+        dateF: bookingInfo.dateF.getTime(),
+        dateT: bookingInfo.dateT.getTime(),
         name: bookingInfo.name
       })
     })
