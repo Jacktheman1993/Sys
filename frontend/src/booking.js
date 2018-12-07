@@ -4,7 +4,7 @@ export default class Book extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            newBooking: { name: '', datoF: this.props.location.state.dateF, datoT: this.props.location.state.dateT, roomID: this.props.location.state.specificRoom.id },
+            newBooking: { name: '', datoF: new Date(this.props.location.state.dateF).getTime(), datoT: new Date(this.props.location.state.dateT).getTime(), roomID: this.props.location.state.specificRoom.id },
             specific: this.props.location.state.specific,
             specificRoom: this.props.location.state.specificRoom,
             dateF: this.props.location.state.dateF,
