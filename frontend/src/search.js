@@ -21,13 +21,6 @@ export default class Search extends Component {
 
         }
 
-        // var url = new URL("https://INSERT API PATH HERE/api/hotel/search"),
-        // params = {country: this.state.newSearch.country, city: this.state.newSearch.city}
-        // Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-        // fetch(url)
-        // .then(res => res.json())
-        // .then(data => results = data)
-        // .then(() => console.log(results))
 
         const searchQuery = this.state.newSearch
 

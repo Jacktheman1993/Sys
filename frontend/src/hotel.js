@@ -18,15 +18,16 @@ export default class Search extends Component {
 
     bookRoom = (evt) => {
         evt.preventDefault();
-        this.props.history.push({
-            pathname: "/booking",
-            state: {
-                specific: this.props.location.state.specific,
-                specificRoom: JSON.parse(evt.target.room.value),
-                dateF: this.props.location.state.dateF,
-                dateT: this.props.location.state.dateT
-            }
-        })
+        alert("You Room has been Booked");
+        // this.props.history.push({
+        //     pathname: "/booking",
+        //     state: {
+        //         specific: this.props.location.state.specific,
+        //         specificRoom: JSON.parse(evt.target.room.value),
+        //         dateF: this.props.location.state.dateF,
+        //         dateT: this.props.location.state.dateT
+        //     }
+        // })
     }
 
     render() {

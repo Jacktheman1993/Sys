@@ -11,15 +11,11 @@ export default class Book extends Component {
             dateT: this.props.location.state.dateT
         }
     }
-    booker = (evt) => {
+     booker = (evt) => {
         evt.preventDefault();
-
-        const bookingStatus = await facade.doBooking(this.state.newBooking)
+        const bookingStatus =  facade.doBooking(this.state.newBooking)
         if (bookingStatus) {
             alert("Booking successful");
-            push({
-                pathname: "/"
-            })
         }
         else{
             alert("Something is fucked. Please contact the fuckup department");
@@ -40,12 +36,9 @@ export default class Book extends Component {
         return (
             <div>
                 <div>
-                    TODO SKRIV TEKST TIL BRUGEREN
-
-                    placeholder text
-                    Dear customer
-                    You have selected {specificRoom} at {specific}
-                    From {newBooking.dateF} to {newBooking.dateT}
+                    <h2>Dear customer</h2>
+                    <h3>You have selected {this.state.specificRoom} at {this.state.specific}</h3>
+                    <h3>From {this.state.newBooking.dateF} to {this.state.newBooking.dateT}</h3>
 
                     If these informations are correct, please enter your name in the field below and submit
                 </div>
@@ -55,7 +48,7 @@ export default class Book extends Component {
                             <input className='form-control' placeholder="Name" id="name" name="name" value={this.state.newBooking.name} onChange={this.inputVal} />
                         </div>
                         <div className='col'>
-                            <button className='btn btn-lg btn-primary' >Søg</button>
+                            <button className='btn btn-lg btn-primary' >Book</button>
                         </div>
                     </div>
                 </form>
