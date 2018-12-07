@@ -65,6 +65,19 @@ public class FacadeHotel {
             em.close();
         }
     }
+    
+    public Room getRoom(Integer roomID) {
+        EntityManager em = emf.createEntityManager();
+        List<Room> list = null;
+        try {
+            TypedQuery<Room> query = em.createQuery("SELECT new Room(r) From Room r WHERE id =:roomID", Room.class);
+            query.setParameter("hotelID", roomID);
+            list = query.getResultList();
+            return list.get(0);
+        } finally {
+            em.close();
+        }
+    }
 
     public boolean book(Reserved reserved) {
         EntityManager em = emf.createEntityManager();

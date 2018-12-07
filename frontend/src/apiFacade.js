@@ -64,6 +64,23 @@ class ApiFacade {
     return fetch(URL + "/search/" + id, options).then(handleHttpErrors);
   }
 
+  getRoomsForSpecific = (bookingInfo) => {
+    const options = this.makeOptions("GET");
+    return fetch(URL + "/book", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        roomID: bookingInfo.roomID,
+        dateF: bookingInfo.dateF,
+        dateT: bookingInfo.dateT,
+        name: bookingInfo.name
+      })
+    })
+    .then(handleHttpErrors);
+  }
 }
 
 const facade = new ApiFacade();

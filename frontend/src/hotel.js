@@ -1,26 +1,30 @@
 import React, { Component } from 'react'
 import facade from './apiFacade'
-import Results from './results';
 export default class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
             rooms: [],
-            specific: this.props.location.state.specific    
+            specific: this.props.location.state.specific,
+            dateF: this.props.location.state.dateF,
+            dateT: this.props.location.state.dateT
         };
     }
 
-    async componentDidMount(){
+    async componentDidMount() {
         const apiRooms = await facade.getRoomsForSpecific(this.props.location.state.specific.hotelid)
-        this.setState({rooms: apiRooms});
+        this.setState({ rooms: apiRooms });
     }
-    
+
     bookRoom = (evt) => {
         evt.preventDefault();
-        // alert("You Have Booked a room");
         this.props.history.push({
             pathname: "/booking",
             state: {
+                specific: this.props.location.state.specific,
+                specificRoom: JSON.parse(evt.target.room.value),
+                dateF: this.props.location.state.dateF,
+                dateT: this.props.location.state.dateT
             }
         })
     }
@@ -29,8 +33,8 @@ export default class Search extends Component {
         let rooms = this.RoomMapper();
         return (
             <div className='table-responsive'>
-            <h2>Hotel: {this.state.specific.name}</h2>
-            <h4>{this.state.specific.description}</h4>
+                <h2>Hotel: {this.state.specific.name}</h2>
+                <h4>{this.state.specific.description}</h4>
                 <table className='table table-hover table-bordered table-dark'>
                     <thead className='thead-light'>
                         <tr>
@@ -64,6 +68,7 @@ export default class Search extends Component {
                 {room.price},- {this.state.specific.currency}
             </td>
             <td><form onSubmit={this.bookRoom}>
+                <input type='hidden' name="room" value={JSON.stringify(room)}></input>
                 <button className='btn btn btn-dark'>Book room</button>
             </form></td>
         </tr>);

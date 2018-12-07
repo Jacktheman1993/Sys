@@ -4,6 +4,8 @@ import './Styles/App.css';
 import Search from './search';
 import Results from './results';
 import Hotel from './hotel';
+import Book from './booking';
+
 
 class Nav extends Component {
   constructor(props) {
@@ -29,6 +31,7 @@ class Nav extends Component {
           <Route exact path="/" render={(props) => <Search  error={this.error} {...props}/>} />
           <Route path ="/results" render={(props) => <Results  error={this.error} {...props}/>} />
           <Route path ="/hotel" render={(props) => <Hotel  error={this.error} {...props}/>} />
+          <Route path ="/booking" render={(props) => <Book  error={this.error} {...props}/>} />
         </div>
       </Router>
     )
